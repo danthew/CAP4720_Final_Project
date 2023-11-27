@@ -4,6 +4,7 @@ class SceneRenderer:
         self.ctx = app.ctx
         self.mesh = app.mesh
         self.scene = app.scene
+        # self.movement_vector = app.movement_vector
         # depth buffer
         # self.depth_texture = self.mesh.texture.textures['depth_texture']
         # self.depth_fbo = self.ctx.framebuffer(depth_attachment = self.depth_texture)

@@ -8,6 +8,7 @@ from light import Light
 from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
+from movement_handler import MovementHandler
 
 class GraphicsEngine:
     def __init__(self, win_size=(1600, 900)):
@@ -42,6 +43,8 @@ class GraphicsEngine:
         self.scene = Scene(self)
         # renderer
         self.scene_renderer = SceneRenderer(self)
+        # # movement
+        # self.movement_handler = MovementHandler(self)
 
     def check_events(self):
         for event in pg.event.get():
@@ -54,6 +57,8 @@ class GraphicsEngine:
     def render(self):
         # clear framebuffer
         self.ctx.clear(color=(0.08, 0.16, 0.18))
+        # # move car
+        # self.movement_handler.move()
         # render scene
         self.scene_renderer.render()
         # swap buffers

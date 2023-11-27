@@ -9,6 +9,12 @@ class VAO:
         self.program = ShaderProgram(ctx)
         self.vaos = {}
 
+        # car vao
+        self.vaos['car'] = self.get_vao(
+            program = self.program.programs['default'],
+            vbo = self.vbo.vbos['car']
+        )
+
         # cube vao
         self.vaos['cube'] = self.get_vao(
             program = self.program.programs['default'],
