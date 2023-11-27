@@ -1,4 +1,5 @@
 from model import *
+from car_model import *
 
 class Scene:
     def __init__(self, app):
@@ -44,4 +45,4 @@ class Scene:
 
     def update(self):
         self.moving_cube.rot.xyz = self.app.time
-        self.car.move()
+        # self.car.move()

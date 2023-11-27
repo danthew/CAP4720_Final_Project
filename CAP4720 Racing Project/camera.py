@@ -23,6 +23,8 @@ class Camera:
 
     def rotate(self):
         rel_x, rel_y = pg.mouse.get_rel()
+        # rel_x = -self.right * SPEED
+        # rel_y = self.right * SPEED
         self.yaw += rel_x * SENSITIVITY
         self.pitch -= rel_y * SENSITIVITY
         self.pitch = max(-89, min(89, self.pitch))
@@ -53,8 +55,10 @@ class Camera:
             self.position -= self.forward * velocity
         if keys[pg.K_a]:
             self.position -= self.right * velocity
+            # self.rotate()
         if keys[pg.K_d]:
             self.position += self.right * velocity
+            # self.rotate()
         if keys[pg.K_q]:
             self.position += self.up * velocity
         if keys[pg.K_e]:
