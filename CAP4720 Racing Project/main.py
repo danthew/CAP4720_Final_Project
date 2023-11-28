@@ -8,10 +8,9 @@ from light import Light
 from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
-from movement_handler import MovementHandler
 
 class GraphicsEngine:
-    def __init__(self, win_size=(1600, 900)):
+    def __init__(self, win_size=(800, 450)):
         # init pygame modules
         pg.init()
         # window size
@@ -43,8 +42,6 @@ class GraphicsEngine:
         self.scene = Scene(self)
         # renderer
         self.scene_renderer = SceneRenderer(self)
-        # # movement
-        # self.movement_handler = MovementHandler(self)
 
     def check_events(self):
         for event in pg.event.get():
@@ -70,6 +67,7 @@ class GraphicsEngine:
     def run(self):
         while True:
             self.get_time()
+            # GraphicsEngine.update_gui(self, self.interface)
             self.check_events()
             self.camera.update()
             self.render()

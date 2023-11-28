@@ -5,6 +5,7 @@ FOV = 50
 NEAR = 0.1
 FAR = 100
 SPEED = 0.01
+ROTATION_SPEED = 0.1
 SENSITIVITY = 0.05
 
 class Camera:
@@ -21,13 +22,13 @@ class Camera:
         self.m_view = self.get_view_matrix()
         self.m_proj = self.get_projection_matrix()
 
-    def rotate(self):
-        rel_x, rel_y = pg.mouse.get_rel()
-        # rel_x = -self.right * SPEED
-        # rel_y = self.right * SPEED
-        self.yaw += rel_x * SENSITIVITY
-        self.pitch -= rel_y * SENSITIVITY
-        self.pitch = max(-89, min(89, self.pitch))
+    # def rotate(self):
+    #     rel_x, rel_y = pg.mouse.get_rel()
+    #     # rel_x = -self.right * SPEED
+    #     # rel_y = self.right * SPEED
+    #     self.yaw += rel_x * SENSITIVITY
+    #     # self.pitch -= rel_y * SENSITIVITY
+    #     # self.pitch = max(-89, min(89, self.pitch))
 
     def update_camera_vectors(self):
         yaw, pitch = glm.radians(self.yaw), glm.radians(self.pitch)
@@ -42,22 +43,25 @@ class Camera:
 
     def update(self):
         self.move()
-        self.rotate()
+        # self.rotate()
         self.update_camera_vectors()
         self.m_view = self.get_view_matrix()
 
     def move(self):
         velocity = SPEED * self.app.delta_time
+        swerve = ROTATION_SPEED * self.app.delta_time
         keys = pg.key.get_pressed()
         if keys[pg.K_w]:
             self.position += self.forward * velocity
         if keys[pg.K_s]:
             self.position -= self.forward * velocity
         if keys[pg.K_a]:
-            self.position -= self.right * velocity
+            self.yaw -= swerve
+            self.update_camera_vectors()
             # self.rotate()
         if keys[pg.K_d]:
-            self.position += self.right * velocity
+            self.yaw += swerve
+            self.update_camera_vectors()
             # self.rotate()
         if keys[pg.K_q]:
             self.position += self.up * velocity

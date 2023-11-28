@@ -20,7 +20,7 @@ class Scene:
         n, s = 20, 2
         for x in range(-n, n, s):
             for z in range(-n, n, s):
-                add(Cube(app, pos=(x, -s, z)))
+                add(Cube(app, pos=(x, -s-5, z)))
 
         # # columns
         # for i in range(9):
@@ -34,8 +34,8 @@ class Scene:
         self.moving_cube = MovingCube(app, pos=(0, 6, 8), scale=(3, 3, 3), tex_id='steel')
         add(self.moving_cube)
 
-        self.car = Car(app, pos=(0, -1, -10), scale=(1,1,1), tex_id='car')
-        add(self.car)
+        # self.car = Car(app, pos=(0, -1, -10), scale=(1,1,1), tex_id='car')
+        add(Car(app, pos=(0, -1, -10)))
         
 
     # def render(self):
@@ -45,4 +45,3 @@ class Scene:
 
     def update(self):
         self.moving_cube.rot.xyz = self.app.time
-        # self.car.move()

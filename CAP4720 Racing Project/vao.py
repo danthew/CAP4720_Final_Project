@@ -11,7 +11,7 @@ class VAO:
 
         # car vao
         self.vaos['car'] = self.get_vao(
-            program = self.program.programs['default'],
+            program = self.program.programs['car'],
             vbo = self.vbo.vbos['car']
         )
 
