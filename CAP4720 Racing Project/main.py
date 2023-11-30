@@ -8,6 +8,7 @@ from light import Light
 from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
+from gui_stuff import GUI
 
 class GraphicsEngine:
     def __init__(self, win_size=(800, 450)):
@@ -22,8 +23,8 @@ class GraphicsEngine:
         # create opengl context
         pg.display.set_mode(self.WIN_SIZE, flags = pg.OPENGL | pg.DOUBLEBUF)
         # mouse settings
-        pg.event.set_grab(True)
-        pg.mouse.set_visible(False)
+        # pg.event.set_grab(True)
+        # pg.mouse.set_visible(False)
         # detect and use existing opengl context
         self.ctx = mgl.create_context()
         # self.ctx.front_face = 'cw'
@@ -33,7 +34,7 @@ class GraphicsEngine:
         self.time = 0
         self.delta_time = 0
         # light
-        self.light = Light()
+        self.light = Light(self)
         # camera
         self.camera = Camera(self)
         # mesh
@@ -42,6 +43,8 @@ class GraphicsEngine:
         self.scene = Scene(self)
         # renderer
         self.scene_renderer = SceneRenderer(self)
+        # gui
+        self.gui = GUI(self)
 
     def check_events(self):
         for event in pg.event.get():
@@ -67,9 +70,12 @@ class GraphicsEngine:
     def run(self):
         while True:
             self.get_time()
+            self.gui.update_gui()
             # GraphicsEngine.update_gui(self, self.interface)
             self.check_events()
+            self.light.update()
             self.camera.update()
+            # self.scene.car.camera.update()
             self.render()
             # set fps to 60
             self.delta_time = self.clock.tick(60)

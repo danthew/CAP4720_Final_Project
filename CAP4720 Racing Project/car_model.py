@@ -1,9 +1,16 @@
 from model import ExtendedBaseModel
+import glm
+import moderngl as mgl
 import pygame as pg
 from camera import Camera
 from gui_stuff import GUI
 
+FOV = 50
+NEAR = 0.1
+FAR = 100
 SPEED = 0.01
+ROTATION_SPEED = 0.1
+SENSITIVITY = 0.05
 
 class Car(ExtendedBaseModel):
     def __init__(self, app, vao_name = 'car', tex_id = 'car', pos = (0, 5, 0), rot = (0, 180, 0), scale = (1, 1, 1)):
@@ -12,12 +19,23 @@ class Car(ExtendedBaseModel):
 
     # def move(self):
     #     velocity = SPEED * self.app.delta_time
+    #     swerve = ROTATION_SPEED * self.app.delta_time
     #     keys = pg.key.get_pressed()
     #     if keys[pg.K_w]:
-    #         self.pos.x += velocity
+    #         if keys[pg.K_a]:
+    #             self.yaw -= swerve
+    #             self.update_camera_vectors()
+    #         # self.rotate()
+    #         if keys[pg.K_d]:
+    #             self.yaw += swerve
+    #             self.update_camera_vectors()
+    #         self.position += self.forward * velocity
     #     if keys[pg.K_s]:
-    #         self.pos.x -= velocity
-    #     if keys[pg.K_a]:
-    #         self.pos.y -= velocity
-    #     if keys[pg.K_d]:
-    #         self.pos.y += velocity
+    #         if keys[pg.K_a]:
+    #             self.yaw -= swerve
+    #             self.update_camera_vectors()
+    #         # self.rotate()
+    #         if keys[pg.K_d]:
+    #             self.yaw += swerve
+    #             self.update_camera_vectors()
+    #         self.position -= self.forward * velocity

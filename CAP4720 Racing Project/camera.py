@@ -7,6 +7,7 @@ FAR = 100
 SPEED = 0.01
 ROTATION_SPEED = 0.1
 SENSITIVITY = 0.05
+ACCELERATION = 0
 
 class Camera:
     def __init__(self, app, position = (0, 0, 4), yaw = -90, pitch = 0):
@@ -52,21 +53,29 @@ class Camera:
         swerve = ROTATION_SPEED * self.app.delta_time
         keys = pg.key.get_pressed()
         if keys[pg.K_w]:
+            if keys[pg.K_a]:
+                self.yaw -= swerve
+                self.update_camera_vectors()
+            # self.rotate()
+            if keys[pg.K_d]:
+                self.yaw += swerve
+                self.update_camera_vectors()
             self.position += self.forward * velocity
         if keys[pg.K_s]:
+            if keys[pg.K_a]:
+                self.yaw -= swerve
+                self.update_camera_vectors()
+            # self.rotate()
+            if keys[pg.K_d]:
+                self.yaw += swerve
+                self.update_camera_vectors()
             self.position -= self.forward * velocity
-        if keys[pg.K_a]:
-            self.yaw -= swerve
-            self.update_camera_vectors()
+        
             # self.rotate()
-        if keys[pg.K_d]:
-            self.yaw += swerve
-            self.update_camera_vectors()
-            # self.rotate()
-        if keys[pg.K_q]:
-            self.position += self.up * velocity
-        if keys[pg.K_e]:
-            self.position -= self.up * velocity
+        # if keys[pg.K_q]:
+        #     self.position += self.up * velocity
+        # if keys[pg.K_e]:
+        #     self.position -= self.up * velocity
         
 
     def get_view_matrix(self):

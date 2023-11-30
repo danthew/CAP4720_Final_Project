@@ -45,6 +45,9 @@ class ExtendedBaseModel(BaseModel):
         self.texture.use(location = 0)
         self.program['camPos'].write(self.camera.position)
         self.program['m_view'].write(self.camera.m_view)
+        self.program['light.Ia'].write(self.app.light.Ia)
+        self.program['light.Id'].write(self.app.light.Id)
+        self.program['light.Is'].write(self.app.light.Is)
         self.program['m_model'].write(self.m_model)
 
     def update_shadow(self):
@@ -119,6 +122,9 @@ class AdvancedSkybox(BaseModel):
         self.on_init()
 
     def update(self):
+        self.tex_id = self.app.time_param
+        self.texture = self.app.mesh.texture.textures[self.tex_id]
+        self.texture.use(location = 0)
         m_view = glm.mat4(glm.mat3(self.camera.m_view))
         self.program['m_invProjView'].write(glm.inverse(self.camera.m_proj * m_view))
     
