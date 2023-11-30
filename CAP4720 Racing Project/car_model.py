@@ -17,8 +17,9 @@ class Car(ExtendedBaseModel):
         super().__init__(app, vao_name, tex_id, pos, rot, scale)
         self.camera = Camera(self.app, (pos[0], pos[1] + 4, pos[2] + 12))
 
-    def update_texture(self):
+    def update_car(self):
         self.texture = self.app.mesh.texture.textures[self.app.gui.get_car_texture()]
+        # self.program['shiny'].write(self.app.gui.get_shine())
 
     # def move(self):
     #     velocity = SPEED * self.app.delta_time

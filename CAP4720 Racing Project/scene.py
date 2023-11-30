@@ -56,4 +56,4 @@ class Scene:
         # for obj in self.objects:
         #     obj.update()
         # self.car.update_shine()
-        self.car.update_texture()
+        self.car.update_car()

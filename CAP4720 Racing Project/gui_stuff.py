@@ -32,3 +32,6 @@ class GUI:
 
     def get_car_texture(self):
         return self.interface['texture'].get_value()
+    
+    def get_shine(self):
+        return self.interface['shiny'].get_value()

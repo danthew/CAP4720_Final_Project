@@ -77,14 +77,16 @@ class Camera:
             if keys[pg.K_d]:
                 self.yaw += swerve
                 self.update_camera_vectors()
-            self.position -= self.forward * (velocity - self.current_accel)
+            self.position += self.forward * (-velocity + self.current_accel)
         else:
             if self.current_accel > 0:
                 self.current_accel -= ACCELERATION
                 # if self.last_key == 'w':
                 self.position += self.forward * (velocity + self.current_accel)
             elif self.current_accel < 0:
-                self.current_accel = 0
+                # self.current_accel = 0
+                self.current_accel += ACCELERATION
+                self.position += self.forward * (-velocity + self.current_accel)
                 # self.position -= self.forward * (velocity + self.current_accel)
                 # elif self.last_key == 's':
                 #     self.position -= self.forward * (velocity + self.current_accel)
