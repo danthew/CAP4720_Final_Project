@@ -19,6 +19,7 @@ uniform sampler2D u_texture_0;
 uniform vec3 camPos;
 uniform sampler2DShadow shadowMap;
 
+
 float getShadow(){
     // hardware-level function to check if pixel is in shadow
     float shadow = textureProj(shadowMap, shadowCoord);

@@ -19,10 +19,11 @@ class Scene:
         add = self.add_object
 
         # floor
-        n, s = 20, 2
-        for x in range(-n, n, s):
-            for z in range(-n, n, s):
-                add(Cube(app, pos=(x, -s-4, z)))
+        # n, s = 50, 2
+        # for x in range(-n*2, n*2, s):
+        #     for z in range(-n, n, s):
+        #         add(Cube(app, pos=(x, -s-4, z)))
+        add(Cube(app, pos = (0, -6, 0), scale = (60, 100, 1)))
 
         # # columns
         # for i in range(9):
@@ -33,15 +34,15 @@ class Scene:
         # add(Cat(app, pos=(5, -4, -10)))
 
         # moving cube
-        self.moving_cube = MovingCube(app, pos=(0, 6, 8), scale=(3, 3, 3), tex_id='steel')
-        add(self.moving_cube)
+        # self.moving_cube = MovingCube(app, pos=(0, 6, 8), scale=(3, 3, 3), tex_id='steel')
+        # add(self.moving_cube)
 
         # self.car = Car(app, pos=(0, -1, -10), tex_id='car')
         self.car = Car(app, pos=(0, -1, -10), tex_id=self.app.gui.get_car_texture())
         add(self.car)
 
         # test obstacle
-        add(Cube(app, pos=(5, -4.5, -10), tex_id='steel'))
+        # add(Cube(app, pos=(5, -4.5, -10), tex_id='steel'))
         
 
     # def render(self):
@@ -50,7 +51,7 @@ class Scene:
     #     self.skybox.render()
 
     def update(self):
-        self.moving_cube.rot.xyz = self.app.time
+        # self.moving_cube.rot.xyz = self.app.time
         self.skybox.update()
         # for obj in self.objects:
         #     obj.update()
