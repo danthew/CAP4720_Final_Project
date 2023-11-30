@@ -6,7 +6,11 @@ class GUI:
         gui = SimpleGUI("Change Parameters")
         time_field = gui.add_radio_buttons("Time of Day", options_dict={'Day':'skybox', 'Night':'skybox2'}, initial_option='Day')
         shiny_field = gui.add_slider("Shininess", min_value=5, max_value=66, initial_value=32, resolution=1)
-        texture_field = gui.add_radio_buttons("Car Texture", options_dict={'Orange':'textures/orange_car.png', 'Green':'textures/green_car.png', 'Purple':'textures/purple_car.png', 'Yellow':'textures/yellow_car.png', 'Blue':'textures/blue_car.png'})
+        texture_field = gui.add_radio_buttons("Car Texture", options_dict={'Orange':'orange_car', 
+                                                                           'Green':'green_car', 
+                                                                           'Purple':'purple_car', 
+                                                                           'Yellow':'yellow_car', 
+                                                                           'Blue':'blue_car'})
         self.interface = {}
         self.interface['time'] = time_field
         self.interface['shiny'] = shiny_field
@@ -25,3 +29,6 @@ class GUI:
         # self.program['EPSILON'] = interface['epsilon'].get_value()
         # self.program['orbColor'] = interface['color'].get_color()
         # self.program['shadows'] = interface['shadows'].get_value()
+
+    def get_car_texture(self):
+        return self.interface['texture'].get_value()

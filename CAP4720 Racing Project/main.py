@@ -33,6 +33,8 @@ class GraphicsEngine:
         self.clock = pg.time.Clock()
         self.time = 0
         self.delta_time = 0
+        # gui
+        self.gui = GUI(self)
         # light
         self.light = Light(self)
         # camera
@@ -43,8 +45,6 @@ class GraphicsEngine:
         self.scene = Scene(self)
         # renderer
         self.scene_renderer = SceneRenderer(self)
-        # gui
-        self.gui = GUI(self)
 
     def check_events(self):
         for event in pg.event.get():

@@ -36,8 +36,8 @@ class Scene:
         self.moving_cube = MovingCube(app, pos=(0, 6, 8), scale=(3, 3, 3), tex_id='steel')
         add(self.moving_cube)
 
-        self.car = Car(app, pos=(0, -1, -10), tex_id='car')
-        # self.car = Car(app, pos=(0, -1, -10), tex_id=self.app.car_texture)
+        # self.car = Car(app, pos=(0, -1, -10), tex_id='car')
+        self.car = Car(app, pos=(0, -1, -10), tex_id=self.app.gui.get_car_texture())
         add(self.car)
 
         # test obstacle
@@ -55,3 +55,4 @@ class Scene:
         # for obj in self.objects:
         #     obj.update()
         # self.car.update_shine()
+        self.car.update_texture()

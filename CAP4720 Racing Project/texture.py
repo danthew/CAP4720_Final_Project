@@ -5,7 +5,12 @@ class Texture:
     def __init__(self, ctx):
         self.ctx = ctx
         self.textures = {}
-        self.textures['car'] = self.get_texture(path = 'textures/orange_car.png')
+        self.textures['orange_car'] = self.get_texture(path = 'textures/orange_car.png')
+        self.textures['purple_car'] = self.get_texture(path = 'textures/purple_car.png')
+        self.textures['yellow_car'] = self.get_texture(path = 'textures/yellow_car.png')
+        self.textures['green_car'] = self.get_texture(path = 'textures/green_car.png')
+        self.textures['blue_car'] = self.get_texture(path = 'textures/blue_car.png')
+
         self.textures['cube'] = self.get_texture(path = 'textures/img.png')
         self.textures['steel'] = self.get_texture(path = 'textures/img_1.png')
         # self.textures[2] = self.get_texture(path = 'textures/img_2.png')
