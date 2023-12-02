@@ -87,6 +87,18 @@ class Track(ExtendedBaseModel):
     def __init__(self, app, vao_name = 'track', tex_id = 'cube', pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
         super().__init__(app, vao_name, tex_id, pos, rot, scale)
 
+class NumberCube(ExtendedBaseModel):
+    def __init__(self, app, vao_name = 'cube', tex_id = 'number_0', pos = (0, 0, 0), rot = (-90, 0, 0), scale = (1, 1, 1)):
+        super().__init__(app, vao_name, tex_id, pos, rot, scale)
+
+    def update_number(self, number):
+        # number_cube_current_time = NumberCube(self.app, tex_id= 'number_' + str(int(number)))
+        # number_cube_current_time.camera = self.app.scene.car.camera
+        # self.app.scene.add_object(number_cube_current_time)
+        self.tex_id = 'number_' + str(int(number))
+        self.texture = self.app.mesh.texture.textures[self.tex_id]
+        self.render()
+
 class Cube(ExtendedBaseModel):
     def __init__(self, app, vao_name = 'cube', tex_id = 'cube', pos = (0, 0, 0), rot = (-90, 0, 0), scale = (1, 1, 1)):
         super().__init__(app, vao_name, tex_id, pos, rot, scale)
@@ -99,26 +111,22 @@ class MovingCube(Cube):
         self.m_model = self.get_model_matrix()
         super().update()
 
-class Cat(ExtendedBaseModel):
-    def __init__(self, app, vao_name = 'cat', tex_id = 'cat', pos = (0, 0, 0), rot = (-90, 0, 0), scale = (1, 1, 1)):
-        super().__init__(app, vao_name, tex_id, pos, rot, scale)
+# class Skybox(BaseModel):
+#     def __init__(self, app, vao_name = 'skybox', tex_id = 'skybox', pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
+#         super().__init__(app, vao_name, tex_id, pos, rot, scale)
+#         self.on_init()
 
-class Skybox(BaseModel):
-    def __init__(self, app, vao_name = 'skybox', tex_id = 'skybox', pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
-        super().__init__(app, vao_name, tex_id, pos, rot, scale)
-        self.on_init()
-
-    def update(self):
-        self.program['m_view'].write(glm.mat4(glm.mat3(self.camera.m_view)))
+#     def update(self):
+#         self.program['m_view'].write(glm.mat4(glm.mat3(self.camera.m_view)))
     
-    def on_init(self):
-        # texture
-        self.texture = self.app.mesh.texture.textures[self.tex_id]
-        self.program['u_texture_skybox'] = 0
-        self.texture.use(location = 0)
-        # mvp
-        self.program['m_proj'].write(self.camera.m_proj)
-        self.program['m_view'].write(glm.mat4(glm.mat3(self.camera.m_view)))
+#     def on_init(self):
+#         # texture
+#         self.texture = self.app.mesh.texture.textures[self.tex_id]
+#         self.program['u_texture_skybox'] = 0
+#         self.texture.use(location = 0)
+#         # mvp
+#         self.program['m_proj'].write(self.camera.m_proj)
+#         self.program['m_view'].write(glm.mat4(glm.mat3(self.camera.m_view)))
 
 class AdvancedSkybox(BaseModel):
     def __init__(self, app, vao_name = 'advanced_skybox', tex_id = 'skybox', pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):

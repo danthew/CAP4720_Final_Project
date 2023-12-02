@@ -8,7 +8,7 @@ class VBO:
         self.vbos['car'] = CarVBO(ctx)
         self.vbos['track'] = TrackVBO(ctx)
         self.vbos['cube'] = CubeVBO(ctx)
-        self.vbos['cat'] = CatVBO(ctx)
+        # self.vbos['cat'] = CatVBO(ctx)
         self.vbos['skybox'] = SkyboxVBO(ctx)
         self.vbos['advanced_skybox'] = AdvancedSkyboxVBO(ctx)
 
@@ -52,7 +52,7 @@ class TrackVBO(BaseVBO):
         self.attribs = ['in_texcoord_0', 'in_normal', 'in_position']
 
     def get_vertex_data(self):
-        objs = pywavefront.Wavefront('objects/RaceTrack.obj', cache = True, parse = True)
+        objs = pywavefront.Wavefront('objects/RaceTrack2.obj', cache = True, parse = True)
         obj = objs.materials.popitem()[1]
         vertex_data = obj.vertices
         vertex_data = np.array(vertex_data, dtype = 'f4')
@@ -102,18 +102,18 @@ class CubeVBO(BaseVBO):
 
         return vertex_data
     
-class CatVBO(BaseVBO):
-    def __init__(self, app):
-        super().__init__(app)
-        self.format = '2f 3f 3f'
-        self.attribs = ['in_texcoord_0', 'in_normal', 'in_position']
+# class CatVBO(BaseVBO):
+#     def __init__(self, app):
+#         super().__init__(app)
+#         self.format = '2f 3f 3f'
+#         self.attribs = ['in_texcoord_0', 'in_normal', 'in_position']
 
-    def get_vertex_data(self):
-        objs = pywavefront.Wavefront('objects/Cat/20430_Cat_v1_NEW.obj', cache = True, parse = True)
-        obj = objs.materials.popitem()[1]
-        vertex_data = obj.vertices
-        vertex_data = np.array(vertex_data, dtype = 'f4')
-        return vertex_data
+#     def get_vertex_data(self):
+#         objs = pywavefront.Wavefront('objects/Cat/20430_Cat_v1_NEW.obj', cache = True, parse = True)
+#         obj = objs.materials.popitem()[1]
+#         vertex_data = obj.vertices
+#         vertex_data = np.array(vertex_data, dtype = 'f4')
+#         return vertex_data
     
 class SkyboxVBO(BaseVBO):
     def __init__(self, ctx):

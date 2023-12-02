@@ -1,6 +1,5 @@
 import glm
 import pygame as pg
-from movement_handler import MovementHandler
 
 FOV = 50
 NEAR = 0.1

@@ -9,7 +9,6 @@ from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
 from gui_stuff import GUI
-from movement_handler import MovementHandler
 
 class GraphicsEngine:
     def __init__(self, win_size=(1200, 900)):
@@ -54,7 +53,7 @@ class GraphicsEngine:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 # print(self.scene.car.pos)
                 self.mesh.destroy()
-                self.scene_renderer.destroy()
+                # self.scene_renderer.destroy()
                 pg.quit()
                 sys.exit()
     
