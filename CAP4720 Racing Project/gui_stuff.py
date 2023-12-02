@@ -10,7 +10,8 @@ class GUI:
                                                                            'Green':'green_car', 
                                                                            'Purple':'purple_car', 
                                                                            'Yellow':'yellow_car', 
-                                                                           'Blue':'blue_car'})
+                                                                           'Blue':'blue_car', 
+                                                                           'Pixel':'pixel_car'})
         self.interface = {}
         self.interface['time'] = time_field
         self.interface['shiny'] = shiny_field
@@ -19,16 +20,7 @@ class GUI:
         # return interface
 
     def update_gui(self):
-        # self.program['FOV'] = 
-        # self.program['time'] = interface['time'].get_value()
-        # self.app.shininess = self.interface['shiny'].get_value()
         self.app.time_param = self.interface['time'].get_value()
-        # self.app.car_texture = self.interface['texture'].get_value()
-        # self.program['MAX_STEPS'] = interface['steps'].get_value()
-        # self.program['MAX_DIST'] = interface['dist'].get_value()
-        # self.program['EPSILON'] = interface['epsilon'].get_value()
-        # self.program['orbColor'] = interface['color'].get_color()
-        # self.program['shadows'] = interface['shadows'].get_value()
 
     def get_car_texture(self):
         return self.interface['texture'].get_value()

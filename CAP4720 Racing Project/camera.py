@@ -1,5 +1,6 @@
 import glm
 import pygame as pg
+from movement_handler import MovementHandler
 
 FOV = 50
 NEAR = 0.1
@@ -12,6 +13,7 @@ ACCELERATION = 0.005
 class Camera:
     def __init__(self, app, position = (0, 0, 4), yaw = -90, pitch = 0):
         self.app = app
+        # self.movement_handler = MovementHandler(self.app, position)
         self.aspect_ratio = app.WIN_SIZE[0] / app.WIN_SIZE[1]
         self.position = glm.vec3(position)
         self.up = glm.vec3(0, 1, 0)
@@ -24,14 +26,6 @@ class Camera:
         # view matrix
         self.m_view = self.get_view_matrix()
         self.m_proj = self.get_projection_matrix()
-
-    # def rotate(self):
-    #     rel_x, rel_y = pg.mouse.get_rel()
-    #     # rel_x = -self.right * SPEED
-    #     # rel_y = self.right * SPEED
-    #     self.yaw += rel_x * SENSITIVITY
-    #     # self.pitch -= rel_y * SENSITIVITY
-    #     # self.pitch = max(-89, min(89, self.pitch))
 
     def update_camera_vectors(self):
         yaw, pitch = glm.radians(self.yaw), glm.radians(self.pitch)
@@ -46,6 +40,7 @@ class Camera:
 
     def update(self):
         self.move()
+        # self.movement_handler.move()
         # self.rotate()
         self.update_camera_vectors()
         self.m_view = self.get_view_matrix()
@@ -54,60 +49,41 @@ class Camera:
         velocity = SPEED * self.app.delta_time
         swerve = ROTATION_SPEED * self.app.delta_time
         keys = pg.key.get_pressed()
+        if abs(self.current_accel) > 0.01:
+            if keys[pg.K_a]:
+                    self.yaw -= swerve
+                    self.update_camera_vectors()
+            # self.rotate()
+            elif keys[pg.K_d]:
+                self.yaw += swerve
+                self.update_camera_vectors()
         if keys[pg.K_w]:
             self.last_key = 'w'
             if self.current_accel < velocity * 2:
                 self.current_accel += ACCELERATION
-            if keys[pg.K_a]:
-                self.yaw -= swerve
-                self.update_camera_vectors()
-            # self.rotate()
-            if keys[pg.K_d]:
-                self.yaw += swerve
-                self.update_camera_vectors()
             self.position += self.forward * (velocity + self.current_accel)
         elif keys[pg.K_s]:
             self.last_key = 's'
             if self.current_accel > -velocity * 2:
                 self.current_accel -= ACCELERATION
-            if keys[pg.K_a]:
-                self.yaw -= swerve
-                self.update_camera_vectors()
-            # self.rotate()
-            if keys[pg.K_d]:
-                self.yaw += swerve
-                self.update_camera_vectors()
             self.position += self.forward * (-velocity + self.current_accel)
         else:
-            if self.current_accel > 0:
+            if self.current_accel > 0.01:
                 self.current_accel -= ACCELERATION
                 # if self.last_key == 'w':
                 self.position += self.forward * (velocity + self.current_accel)
-            elif self.current_accel < 0:
+            elif self.current_accel < -0.01:
                 # self.current_accel = 0
                 self.current_accel += ACCELERATION
                 self.position += self.forward * (-velocity + self.current_accel)
-                # self.position -= self.forward * (velocity + self.current_accel)
-                # elif self.last_key == 's':
-                #     self.position -= self.forward * (velocity + self.current_accel)
-            # elif self.current_accel < 0:
-            #     self.current_accel += ACCELERATION
-            #     # if self.last_key == 'w':
-            #     # self.position += self.forward * (velocity + self.current_accel)
-            #     # elif self.last_key == 's':
-            #     self.position -= self.forward * (velocity + self.current_accel)
             else:
+                self.current_accel = 0
                 pass
-        
-            # self.rotate()
-        # if keys[pg.K_q]:
-        #     self.position += self.up * velocity
-        # if keys[pg.K_e]:
-        #     self.position -= self.up * velocity
         
 
     def get_view_matrix(self):
         return glm.lookAt(self.position, self.position + self.forward, self.up)
+        # return glm.lookAt(self.movement_handler.position, self.movement_handler.position + self.forward, self.up)
 
     def get_projection_matrix(self):
         return glm.perspective(glm.radians(FOV), self.aspect_ratio, NEAR, FAR)

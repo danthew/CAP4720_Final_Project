@@ -4,6 +4,7 @@ import moderngl as mgl
 import pygame as pg
 from camera import Camera
 from gui_stuff import GUI
+from movement_handler import MovementHandler
 
 FOV = 50
 NEAR = 0.1
@@ -19,27 +20,3 @@ class Car(ExtendedBaseModel):
 
     def update_car(self):
         self.texture = self.app.mesh.texture.textures[self.app.gui.get_car_texture()]
-        # self.program['shiny'].write(self.app.gui.get_shine())
-
-    # def move(self):
-    #     velocity = SPEED * self.app.delta_time
-    #     swerve = ROTATION_SPEED * self.app.delta_time
-    #     keys = pg.key.get_pressed()
-    #     if keys[pg.K_w]:
-    #         if keys[pg.K_a]:
-    #             self.yaw -= swerve
-    #             self.update_camera_vectors()
-    #         # self.rotate()
-    #         if keys[pg.K_d]:
-    #             self.yaw += swerve
-    #             self.update_camera_vectors()
-    #         self.position += self.forward * velocity
-    #     if keys[pg.K_s]:
-    #         if keys[pg.K_a]:
-    #             self.yaw -= swerve
-    #             self.update_camera_vectors()
-    #         # self.rotate()
-    #         if keys[pg.K_d]:
-    #             self.yaw += swerve
-    #             self.update_camera_vectors()
-    #         self.position -= self.forward * velocity

@@ -15,6 +15,12 @@ class VAO:
             vbo = self.vbo.vbos['car']
         )
 
+        # track vao
+        self.vaos['track'] = self.get_vao(
+            program = self.program.programs['default'],
+            vbo = self.vbo.vbos['track']
+        )
+
         # cube vao
         self.vaos['cube'] = self.get_vao(
             program = self.program.programs['default'],

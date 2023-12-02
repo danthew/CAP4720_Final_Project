@@ -83,6 +83,10 @@ class ExtendedBaseModel(BaseModel):
         self.program['light.Id'].write(self.app.light.Id)
         self.program['light.Is'].write(self.app.light.Is)
 
+class Track(ExtendedBaseModel):
+    def __init__(self, app, vao_name = 'track', tex_id = 'cube', pos = (0, 0, 0), rot = (0, 0, 0), scale = (1, 1, 1)):
+        super().__init__(app, vao_name, tex_id, pos, rot, scale)
+
 class Cube(ExtendedBaseModel):
     def __init__(self, app, vao_name = 'cube', tex_id = 'cube', pos = (0, 0, 0), rot = (-90, 0, 0), scale = (1, 1, 1)):
         super().__init__(app, vao_name, tex_id, pos, rot, scale)

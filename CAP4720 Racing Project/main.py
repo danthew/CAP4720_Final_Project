@@ -9,9 +9,10 @@ from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
 from gui_stuff import GUI
+from movement_handler import MovementHandler
 
 class GraphicsEngine:
-    def __init__(self, win_size=(800, 450)):
+    def __init__(self, win_size=(1200, 750)):
         # init pygame modules
         pg.init()
         # window size
@@ -39,6 +40,8 @@ class GraphicsEngine:
         self.light = Light(self)
         # camera
         self.camera = Camera(self)
+        # movement handler IF NEEDED
+        # self.mh = MovementHandler(self)
         # mesh
         self.mesh = Mesh(self)
         # scene
@@ -75,6 +78,7 @@ class GraphicsEngine:
             self.check_events()
             self.light.update()
             self.camera.update()
+            # self.mh.update()
             # self.scene.car.camera.update()
             self.render()
             # set fps to 60

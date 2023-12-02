@@ -10,6 +10,9 @@ class Texture:
         self.textures['yellow_car'] = self.get_texture(path = 'textures/yellow_car.png')
         self.textures['green_car'] = self.get_texture(path = 'textures/green_car.png')
         self.textures['blue_car'] = self.get_texture(path = 'textures/blue_car.png')
+        self.textures['pixel_car'] = self.get_texture(path = 'textures/pixel_grid.png')
+
+        # self.textures['track'] = self.get_texture(path = 'textures/')
 
         self.textures['cube'] = self.get_texture(path = 'textures/img.png')
         self.textures['steel'] = self.get_texture(path = 'textures/img_1.png')
