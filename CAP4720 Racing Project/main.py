@@ -12,7 +12,7 @@ from gui_stuff import GUI
 from movement_handler import MovementHandler
 
 class GraphicsEngine:
-    def __init__(self, win_size=(1200, 750)):
+    def __init__(self, win_size=(1200, 900)):
         # init pygame modules
         pg.init()
         # window size
@@ -52,6 +52,7 @@ class GraphicsEngine:
     def check_events(self):
         for event in pg.event.get():
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                # print(self.scene.car.pos)
                 self.mesh.destroy()
                 self.scene_renderer.destroy()
                 pg.quit()
@@ -78,6 +79,7 @@ class GraphicsEngine:
             self.check_events()
             self.light.update()
             self.camera.update()
+            # self.scene.car.camera.update()
             # self.mh.update()
             # self.scene.car.camera.update()
             self.render()

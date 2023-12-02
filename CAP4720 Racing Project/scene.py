@@ -22,11 +22,13 @@ class Scene:
         # add(Cube(app, pos = (0, -6, 0), scale = (60, 100, 1)))
 
         # track
-        add(Track(self.app, pos = (0, -4.5, -10)))
+        add(Track(app, pos = (0, -4.5, -10)))
         # add(Cube(app, pos = (0, 0, 0), scale = (1, 100, 5)))
-        self.car = Car(app, pos=(0, -1, -10), tex_id=self.app.gui.get_car_texture())
+        self.car = Car(app, pos=(0, -4, -10), tex_id=self.app.gui.get_car_texture())
         add(self.car)
+        # add(Cube(app, pos = (-95, -2.5, -10)))
 
     def update(self):
         self.skybox.update()
         self.car.update_car()
+        # self.car.program['shiny'].write(self.app.gui.get_shine())

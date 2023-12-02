@@ -4,25 +4,31 @@ from movement_handler import MovementHandler
 
 FOV = 50
 NEAR = 0.1
-FAR = 100
+FAR = 1000
 SPEED = 0.01
-ROTATION_SPEED = 0.05
+# ROTATION_SPEED = 0.05
 SENSITIVITY = 0.05
-ACCELERATION = 0.005
+# ACCELERATION = 0.005
 
 class Camera:
     def __init__(self, app, position = (0, 0, 4), yaw = -90, pitch = 0):
         self.app = app
         # self.movement_handler = MovementHandler(self.app, position)
         self.aspect_ratio = app.WIN_SIZE[0] / app.WIN_SIZE[1]
+
         self.position = glm.vec3(position)
         self.up = glm.vec3(0, 1, 0)
         self.right = glm.vec3(1, 0, 0)
         self.forward = glm.vec3(0, 0, -1)
         self.yaw = yaw
         self.pitch = pitch
+
+        self.max_speed = 2.0
+        self.max_acceleration = 0.005
+        self.rotation_speed = 0.05
         self.current_accel = 0.0
         self.last_key = ''
+
         # view matrix
         self.m_view = self.get_view_matrix()
         self.m_proj = self.get_projection_matrix()
@@ -39,6 +45,9 @@ class Camera:
         self.up = glm.normalize(glm.cross(self.right, self.forward))
 
     def update(self):
+        self.max_speed = self.app.gui.get_max_speed()
+        self.max_acceleration = self.app.gui.get_acceleration()
+        self.rotation_speed = self.app.gui.get_rotation_speed()
         self.move()
         # self.movement_handler.move()
         # self.rotate()
@@ -47,7 +56,7 @@ class Camera:
 
     def move(self):
         velocity = SPEED * self.app.delta_time
-        swerve = ROTATION_SPEED * self.app.delta_time
+        swerve = self.rotation_speed * self.app.delta_time
         keys = pg.key.get_pressed()
         if abs(self.current_accel) > 0.01:
             if keys[pg.K_a]:
@@ -59,22 +68,26 @@ class Camera:
                 self.update_camera_vectors()
         if keys[pg.K_w]:
             self.last_key = 'w'
-            if self.current_accel < velocity * 2:
-                self.current_accel += ACCELERATION
+            if self.current_accel < velocity * self.max_speed:
+                # self.current_accel += ACCELERATION
+                self.current_accel += self.max_acceleration
             self.position += self.forward * (velocity + self.current_accel)
         elif keys[pg.K_s]:
             self.last_key = 's'
-            if self.current_accel > -velocity * 2:
-                self.current_accel -= ACCELERATION
+            if self.current_accel > -velocity * self.max_speed:
+                # self.current_accel -= ACCELERATION
+                self.current_accel -= self.max_acceleration
             self.position += self.forward * (-velocity + self.current_accel)
         else:
             if self.current_accel > 0.01:
-                self.current_accel -= ACCELERATION
+                # self.current_accel -= ACCELERATION
+                self.current_accel -= self.max_acceleration
                 # if self.last_key == 'w':
                 self.position += self.forward * (velocity + self.current_accel)
             elif self.current_accel < -0.01:
                 # self.current_accel = 0
-                self.current_accel += ACCELERATION
+                # self.current_accel += ACCELERATION
+                self.current_accel += self.max_acceleration
                 self.position += self.forward * (-velocity + self.current_accel)
             else:
                 self.current_accel = 0

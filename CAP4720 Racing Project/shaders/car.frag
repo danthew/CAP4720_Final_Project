@@ -14,11 +14,11 @@ struct Light {
     vec3 Is;
 };
 
-uniform int shiny;
 uniform Light light;
 uniform sampler2D u_texture_0;
 uniform vec3 camPos;
 uniform sampler2DShadow shadowMap;
+uniform int shiny;
 
 float getShadow(){
     // hardware-level function to check if pixel is in shadow
