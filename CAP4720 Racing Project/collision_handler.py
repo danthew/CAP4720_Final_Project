@@ -25,7 +25,7 @@ class Collider:
 
         #print(top_vertices_2d)
 
-        self.top_rects = [pg.Rect(v[0]*SCALE, (v[1]-10)*SCALE, SCALE, SCALE) for v in self.top_vertices_2d]
+        self.top_rects = [pg.Rect(v[0]*SCALE-SCALE, (v[1]-10)*SCALE-SCALE, 2*SCALE, 2*SCALE) for v in self.top_vertices_2d]
 
         '''
         for rect in self.top_rects:
