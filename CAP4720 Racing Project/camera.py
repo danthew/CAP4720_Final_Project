@@ -1,5 +1,6 @@
 import glm
 import pygame as pg
+import collision_handler as ch
 
 FOV = 50
 NEAR = 0.1
@@ -32,6 +33,8 @@ class Camera:
         self.m_view = self.get_view_matrix()
         self.m_proj = self.get_projection_matrix()
 
+        self.collision_handler = ch.Collider(self)
+
     def update_camera_vectors(self):
         yaw, pitch = glm.radians(self.yaw), glm.radians(self.pitch)
 
@@ -54,6 +57,13 @@ class Camera:
         self.m_view = self.get_view_matrix()
 
     def move(self):
+
+        if self.collision_handler.car_track_collision():
+             self.position -= self.forward * 5
+             self.current_accel = 0
+             return
+
+
         velocity = SPEED * self.app.delta_time
         swerve = self.rotation_speed * self.app.delta_time
         keys = pg.key.get_pressed()
