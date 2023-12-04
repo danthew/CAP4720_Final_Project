@@ -86,7 +86,7 @@ class GraphicsEngine:
                 self.state = GAME
                 self.setupGame()
             elif self.state == GAME:
-                print("GAME LOOP")
+                # print("GAME LOOP")
                 self.get_time()
                 self.gui.update_gui()
                 # GraphicsEngine.update_gui(self, self.interface)

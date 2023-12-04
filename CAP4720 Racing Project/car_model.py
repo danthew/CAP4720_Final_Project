@@ -40,12 +40,11 @@ class Car(ExtendedBaseModel):
             self.midway = True
         if self.midway == True:
             if (self.app.camera.position[0] >= -80) & (self.app.camera.position[2] <= -10):
+                self.midway = False
                 if (self.time_holder < self.best_time) | (self.best_time == 0):
                     self.best_time = self.time_holder
-                    self.time_holder = 0.0
                     self.app.scene.number_cube_best_time_1.update_number(((self.best_time % 60000) / 10000) % 10)
                     self.app.scene.number_cube_best_time_2.update_number(((self.best_time % 60000) / 1000) % 10)
                     self.app.scene.number_cube_best_time_3.update_number((self.best_time / 100) % 10)
-                    # print(self.best_time)
-                    self.midway = False
+                    self.time_holder = 0.0
                 self.start_time = pg.time.get_ticks()
