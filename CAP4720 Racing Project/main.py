@@ -9,11 +9,20 @@ from mesh import Mesh
 from scene import Scene
 from scene_renderer import SceneRenderer
 from gui_stuff import GUI
+from title import Title
+
+MAINMENU = 0
+GAME = 1
 
 class GraphicsEngine:
-    def __init__(self, win_size=(1200, 900)):
+    def __init__(self):
+        self.state = MAINMENU
+        self.title = Title()
+
         # init pygame modules
         pg.init()
+
+    def setupGame(self, win_size=(1200, 900)):
         # window size
         self.WIN_SIZE = win_size
         # set opengl attr
@@ -72,18 +81,24 @@ class GraphicsEngine:
 
     def run(self):
         while True:
-            self.get_time()
-            self.gui.update_gui()
-            # GraphicsEngine.update_gui(self, self.interface)
-            self.check_events()
-            self.light.update()
-            self.camera.update()
-            # self.scene.car.camera.update()
-            # self.mh.update()
-            # self.scene.car.camera.update()
-            self.render()
-            # set fps to 60
-            self.delta_time = self.clock.tick(60)
+            if self.state == MAINMENU:
+                self.title.runPyGame()
+                self.state = GAME
+                self.setupGame()
+            elif self.state == GAME:
+                print("GAME LOOP")
+                self.get_time()
+                self.gui.update_gui()
+                # GraphicsEngine.update_gui(self, self.interface)
+                self.check_events()
+                self.light.update()
+                self.camera.update()
+                # self.scene.car.camera.update()
+                # self.mh.update()
+                # self.scene.car.camera.update()
+                self.render()
+                # set fps to 60
+                self.delta_time = self.clock.tick(60)
 
 if __name__ == '__main__':
     app = GraphicsEngine()
