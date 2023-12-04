@@ -1,9 +1,4 @@
-# PyGame template.
- 
-# Import standard modules.
 import sys
- 
-# Import non-standard modules.
 import pygame
 from pygame.locals import *
 
@@ -11,13 +6,13 @@ black = (0, 0, 0)
 white = (255, 255, 255)
 
 width, height = 1200, 900
-
-#pygame.init()
  
 class Title:
 
     def draw(self, screen):
-        screen.fill((255, 165, 0)) # Fill the screen with black.
+        # Draw background image
+        bg = pygame.image.load("./textures/bg.jpg").convert()
+        screen.blit(bg, (0, -275))
 
         # Redraw screen here.
         smallfont = pygame.font.SysFont('Arial', 50)
@@ -25,24 +20,25 @@ class Title:
 
         # For title screen
         # Game title
-        title = bigfont.render('Speed Demon', True, (255, 255,255))
-        screen.blit(title, (width/2 - 320, 100))
+        title = bigfont.render('Speed Demon', True, (255, 255, 255))
+        text_rect = title.get_rect(center=(width/2, 150))
+        screen.blit(title, text_rect)
         
         # Play button
         play_rect = pygame.Rect(0, 0, 280, 80)
-        play_rect.center = (width/2, height/2)
+        play_rect.center = (width/2, height/2 - 100)
         pygame.draw.rect(screen, (105, 105, 105), play_rect)
         play = smallfont.render('PLAY', True, (255, 255, 255))
-        text_rect = play.get_rect(center=(width/2, height/2))
-        screen.blit(play, text_rect)
+        text_rect2 = play.get_rect(center=(width/2, height/2 - 100))
+        screen.blit(play, text_rect2)
 
         # Exit button
         exit_rect = pygame.Rect(0, 0, 280, 80)
-        exit_rect.center = (width/2, height/2 + 110)
+        exit_rect.center = (width/2, height/2 + 10)
         pygame.draw.rect(screen, (105, 105, 105), exit_rect)
         exit = smallfont.render('EXIT', True, (255, 255,255))
-        text_rect2 = exit.get_rect(center=(width/2, height/2 + 110))
-        screen.blit(exit, text_rect2)
+        text_rect3 = exit.get_rect(center=(width/2, height/2 + 10))
+        screen.blit(exit, text_rect3)
 
         # Flip the display so that the things we drew actually show up.
         pygame.display.flip()
@@ -61,9 +57,9 @@ class Title:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse = pygame.mouse.get_pos()
                     if width/2 - 140 <= mouse[0] <= width/2 + 140:
-                        if height/2 - 40 <= mouse[1] <= height/2 + 40:
+                        if height/2 - 140 <= mouse[1] <= height/2 - 60:
                             titleActive = False
                             # Change to main gameplay
-                        elif height/2 + 70 <= mouse[1] <= height/2 + 150:
+                        elif height/2 - 30 <= mouse[1] <= height/2 + 50:
                             pygame.quit()
                             sys.exit()
